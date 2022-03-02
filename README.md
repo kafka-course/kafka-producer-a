@@ -2,8 +2,8 @@
 
 ## What this example project shows
 
-* Start a kafka cluster with two brokers with docker-compose
-* send messages, ignoring any response from the producer API
+* set up a two broker kafka cluster with docker-compose
+* send messages, ignoring any response from the Producer-API
 
 ## Let it run
 
