@@ -20,7 +20,7 @@ public class KafkaProducerApplication {
 		SpringApplication.run(KafkaProducerApplication.class, args);
 		// tag::create[]
 		Properties props = new Properties();
-		props.put("bootstrap.servers", "localhost:9092");
+		props.put("bootstrap.servers", "localhost:9082");
 		props.put("key.serializer", LongSerializer.class.getName());
 		props.put("value.serializer", StringSerializer.class.getName());
 
@@ -35,7 +35,7 @@ public class KafkaProducerApplication {
 				String message = "Hallo Welt #" + i;
 
 				ProducerRecord<Long, String> record = new ProducerRecord<>(
-						"test",    // Topic
+						"testAB",    // Topic
 						message    // Value
 				);
 
