@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+git config user.name "$GITHUB_ACTOR"
+git config user.email "${GITHUB_ACTOR}@bots.github.com"
+
 git checkout gh-pages
 
 git rm -rf docs
