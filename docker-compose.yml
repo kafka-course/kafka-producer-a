@@ -1,20 +1,13 @@
 version: "3"
 
-
-
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:6.2.0
-    container_name: zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
-# Any Reason to expose this port?
-#    ports:
-#      - '2181:2181'
 
   kafka1:
     image: confluentinc/cp-kafka:6.2.0
-    container_name: kafka1
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -30,7 +23,6 @@ services:
 
   kafka2:
     image: confluentinc/cp-kafka:6.2.0
-    container_name: kafka2
     environment:
       KAFKA_BROKER_ID: 2
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -46,7 +38,6 @@ services:
 
   kafdrop:
     image: obsidiandynamics/kafdrop:latest
-    container_name: kafdrop
     ports:
       - 9000:9000
     environment:
@@ -54,8 +45,32 @@ services:
     depends_on:
       - kafka1
       - kafka2
+
   tools:
     image: dancier/kafka-tools:latest
     # To make the container not stop immediately
     stdin_open: true
     tty: true
+
+  policing-db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: kafka
+      POSTGRES_PASSWORD: kafka
+      POSTGRES_DB: kafka
+    volumes:
+      - ./volumes/dancer-data:/var/lib/postgresql/data
+
+  pg-admin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@dancier.net
+      PGADMIN_DEFAULT_PASSWORD: secret
+    volumes:
+      - ./volumes/pg-admin-data:/var/lib/pgadmin
