@@ -18,7 +18,8 @@ docker-compose up -d
 ### Check that message has been send:
 
 [Web UI (http://localhost:9000)](http://localhost:9000)
-
+(When you are having problems starting the Web UI container, you likely have to change file permissions:
+``sudo chown -R 5050:5050 volumes/pg-admin-data/``)
 ### Stop the infrastructure
 
 ``

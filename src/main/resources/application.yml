@@ -4,9 +4,9 @@ spring:
     hibernate:
       ddl-auto: validate
   datasource:
-    url: jdbc:postgresql://localhost:5432/dancer
-    username: dancer
-    password: dancer
+    url: jdbc:postgresql://localhost:5432/kafka
+    username: kafka
+    password: kafka
   database-platform: org.hibernate.dialect.PostgreSQLDialect
   liquibase:
     change-log: classpath:liquibase-changeLog.xml
