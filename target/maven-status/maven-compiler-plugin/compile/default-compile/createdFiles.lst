@@ -1,0 +1,6 @@
+net/dancier/producer/controller/ContractController.class
+net/dancier/producer/ContractRepository.class
+net/dancier/producer/ContractService.class
+net/dancier/producer/KafkaProducerApplication.class
+net/dancier/producer/model/ContractStatus.class
+net/dancier/producer/model/Contract.class

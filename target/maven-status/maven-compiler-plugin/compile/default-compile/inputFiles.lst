@@ -1,0 +1,6 @@
+/home/marc/coding/kafka-course/kafka-producer-a/src/main/java/net/dancier/producer/model/ContractStatus.java
+/home/marc/coding/kafka-course/kafka-producer-a/src/main/java/net/dancier/producer/ContractService.java
+/home/marc/coding/kafka-course/kafka-producer-a/src/main/java/net/dancier/producer/model/Contract.java
+/home/marc/coding/kafka-course/kafka-producer-a/src/main/java/net/dancier/producer/KafkaProducerApplication.java
+/home/marc/coding/kafka-course/kafka-producer-a/src/main/java/net/dancier/producer/controller/ContractController.java
+/home/marc/coding/kafka-course/kafka-producer-a/src/main/java/net/dancier/producer/ContractRepository.java
