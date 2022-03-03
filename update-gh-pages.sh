@@ -3,6 +3,8 @@
 git config user.name "$GITHUB_ACTOR"
 git config user.email "${GITHUB_ACTOR}@bots.github.com"
 
+git fetch
+
 git checkout gh-pages
 
 git rm -rf docs
