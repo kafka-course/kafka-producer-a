@@ -10,7 +10,7 @@ mvn clean package
 
 git checkout gh-pages
 
-git add -rf target
+git add -f target
 
 git commit -a -m "new stuff"
 
