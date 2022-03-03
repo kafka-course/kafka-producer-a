@@ -22,7 +22,8 @@ git config user.email "${GITHUB_ACTOR}@bots.github.com"
 git checkout "$target_branch"
 git rebase "${remote_name}/${main_branch}"
 
-./bin/build "$build_dir"
+mvn clean package
+
 git add "$build_dir"
 
 git commit -m "updated GitHub Pages"
