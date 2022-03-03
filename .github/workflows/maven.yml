@@ -22,5 +22,5 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
-      run: update-gh-pages.sh
+    - name: Build Docs and Deploy
+      run: ./update-gh-pages.sh
