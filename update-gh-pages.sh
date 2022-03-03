@@ -2,7 +2,9 @@
 
 git checkout gh-pages
 
-git rm -rf target
+git rm -rf docs
+
+git commit -a -m "removed old stuff"
 
 git checkout main
 
@@ -10,7 +12,9 @@ mvn clean package
 
 git checkout gh-pages
 
-git add -f target/generated-docs
+mv target/generated-docs docs
+
+git add -f docs
 
 git commit -a -m "new stuff"
 
