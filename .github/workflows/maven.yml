@@ -22,5 +22,7 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
+    - name: install graphviz
+      run: sudo apt-get install graphviz
     - name: Build Docs and Deploy
       run: ./update-gh-pages.sh
