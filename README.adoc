@@ -1,0 +1,7 @@
+# First attempt of sending event with Kafka
+
+This example project is part of my general Kafka Course.
+
+For further information:
+
+* https://kafka-course.github.io/kafka-producer-a/[Documentation of this example project]
