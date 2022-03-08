@@ -27,17 +27,20 @@ docker-compose up -d
 
 ### Start the example rest
 
-``
+[source, sh]
+----
 ./mvnw spring-boot:run
-``
+----
 
 ### Let`s see what is wrong with this example project
 
 #### Create a Contract
 
-``curl --request POST \
+[source, sh]
+----
+curl --request POST \
   --url http://localhost:8080/contracts
-``
+----
 
 You should grab the created contract id for further tasks.
 
@@ -45,39 +48,48 @@ You should grab the created contract id for further tasks.
 
 Our implementation will only send events, when you change contracts. So open your browser:
 
-[Web UI (http://localhost:9000)](http://localhost:9000)
+link:http://localhost:9000[WebUi]
 
 You should verify that no event has been send.
 
 #### Now change the contract
 
-``
+[source, sh]
+----
 curl --request POST \
   --url http://localhost:8080/contracts/9b9e5035-71d8-4fde-81b2-9bdb4344b0fb \
   --header 'Content-Type: text/plain' \
   --data IN_VERIFICATION
-``
+----
 
 Now should can verfiy that an event has been send.
 
-[Web UI (http://localhost:9000)](http://localhost:9000)
+link:http://localhost:9000[WebUi]
 
 Now, shutdown kafka:
 
-``docker-compose stop kafka1 kafka2 zookeeper``
+[source, sh]
+----
+docker-compose stop kafka1 kafka2 zookeeper``
+----
 
 Now, change the state of the contract back to application
 
-``curl --request POST \
+[source, sh]
+----
+curl --request POST \
   --url http://localhost:8080/contracts/9b9e5035-71d8-4fde-81b2-9bdb4344b0fb \
   --header 'Content-Type: text/plain' \
   --data APPLICATION
-``
+----
+
 You can check the state of the contract with:
 
-``curl --request GET \
+[source, sh]
+----
+curl --request GET \
   --url http://localhost:8080/contracts
-``
+----
 
 You should see that the state has been changed.
 
@@ -90,7 +102,10 @@ turn off your rest-service.
 
 Restart kafka:
 
-``docker-compose start kafka1 kafka2 zookeeper``
+[source, sh]
+----
+docker-compose start kafka1 kafka2 zookeeper
+----
 
 
 Still no corresponding event.
@@ -102,6 +117,7 @@ still no event.
 
 ### Stop the infrastructure
 
-``
+[source, sh]
+----
 docker-compose down
-``
+----
