@@ -15,8 +15,8 @@ public class KafkaService {
     public void sendMessage(String topic, String message) {
         Producer producer = producerFactory.createProducer();
         ProducerRecord<Long, String> record = new ProducerRecord<>(
-                "huhu",    // Topic
-                message    // Value
+                topic,
+                message
         );
         producer.send(record);
     }

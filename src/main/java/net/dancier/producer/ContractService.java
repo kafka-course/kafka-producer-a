@@ -14,6 +14,8 @@ import java.util.stream.StreamSupport;
 @RequiredArgsConstructor
 public class ContractService {
 
+    private final static String CONTRACT_UPDATE_EVENT_NAME = "ContractUpdatedEvent";
+
     private final ContractRepository contractRepository;
 
     public final KafkaService kafkaService;
@@ -35,7 +37,8 @@ public class ContractService {
         contract.setStatus(contractStatus);
         contractRepository.save(contract);
 
-        kafkaService.sendMessage("Test", "Bla");
+        kafkaService.sendMessage(CONTRACT_UPDATE_EVENT_NAME,
+                contractId + " - " + contractStatus);
     }
 
     public Contract createContract() {

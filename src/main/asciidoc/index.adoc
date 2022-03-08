@@ -13,40 +13,87 @@
 ``
 docker-compose up -d
 ``
-### Run the example programm
+
+(When you are having problems starting the Web UI container, you likely have to change file permissions:
+``sudo chown -R 5050:5050 volumes/pg-admin-data/``)
+
+
+### Start the example rest
 ``
 ./mvnw spring-boot:run
 ``
-### Check that message has been send:
+
+### Let`s see what is wrong with this example project
+
+#### Create a Contract
+
+``curl --request POST \
+  --url http://localhost:8080/contracts
+``
+
+You should grab the created contract id for further tasks.
+
+#### Check that no event has been send
+
+Our implementation will only send events, when you change contracts. So open your browser:
 
 [Web UI (http://localhost:9000)](http://localhost:9000)
-(When you are having problems starting the Web UI container, you likely have to change file permissions:
-``sudo chown -R 5050:5050 volumes/pg-admin-data/``)
+
+You should verify that no event has been send.
+
+#### Now change the contract
+
+``
+curl --request POST \
+  --url http://localhost:8080/contracts/9b9e5035-71d8-4fde-81b2-9bdb4344b0fb \
+  --header 'Content-Type: text/plain' \
+  --data IN_VERIFICATION
+``
+
+Now should can verfiy that an event has been send.
+
+[Web UI (http://localhost:9000)](http://localhost:9000)
+
+Now, shutdown kafka:
+
+``docker-compose stop kafka1 kafka2 zookeeper``
+
+Now, change the state of the contract back to application
+
+``curl --request POST \
+  --url http://localhost:8080/contracts/9b9e5035-71d8-4fde-81b2-9bdb4344b0fb \
+  --header 'Content-Type: text/plain' \
+  --data APPLICATION
+``
+You can check the state of the contract with:
+
+``curl --request GET \
+  --url http://localhost:8080/contracts
+``
+
+You should see that the state has been changed.
+
+Check now the log from the rest-service. You should see, that the kafka-producer is realizing that it can not connect to any kafka-broker.
+
+You can also verfiy that no corresponding event has been send.
+No simulate that eg. K8s is stopping your instance:
+
+turn off your rest-service.
+
+Restart kafka:
+
+``docker-compose start kafka1 kafka2 zookeeper``
+
+
+Still no corresponding event.
+
+Start the rest service again:
+
+still no event.
+
+
 ### Stop the infrastructure
 
 ``
 docker-compose down
 ``
-
-[plantuml, cloud-architecture, svg]
-....
-@startuml
- left to right direction
- actor user
- component browser
- boundary wlan_router
- cloud docker {
-   database db
-   boundary reverse_proxy
-   node nextcloud
-   node collabora
- }
-user --> browser
-browser --> wlan_router
-wlan_router --> reverse_proxy
-reverse_proxy --> nextcloud
-reverse_proxy --> collabora
-nextcloud --> db
-
-@enduml
-....
