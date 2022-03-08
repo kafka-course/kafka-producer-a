@@ -39,7 +39,7 @@ services:
   kafdrop:
     image: obsidiandynamics/kafdrop:latest
     ports:
-      - 9000:9000
+      - "9000:9000"
     environment:
       - KAFKA_BROKERCONNECT=kafka1:9092,kafka2:9092
     depends_on:
@@ -54,7 +54,6 @@ services:
 
   policing-db:
     image: postgres
-    restart: always
     ports:
       - "5432:5432"
     environment:

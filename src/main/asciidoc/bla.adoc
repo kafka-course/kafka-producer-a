@@ -1,0 +1,25 @@
+# bla
+
+
+[plantuml, cloud-architecture, svg]
+....
+@startuml
+ left to right direction
+ actor user
+ component browser
+ boundary wlan_router
+ cloud docker {
+   database db
+   boundary reverse_proxy
+   node nextcloud
+   node collabora
+ }
+user --> browser
+browser --> wlan_router
+wlan_router --> reverse_proxy
+reverse_proxy --> nextcloud
+reverse_proxy --> collabora
+nextcloud --> db
+
+@enduml
+....

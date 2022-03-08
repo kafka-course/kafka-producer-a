@@ -13,3 +13,7 @@ spring:
   test:
     database:
       replace: none
+
+app:
+  kafka:
+    bootstrap-servers: localhost:9082

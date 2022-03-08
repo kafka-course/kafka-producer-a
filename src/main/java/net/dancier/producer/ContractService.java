@@ -16,6 +16,8 @@ public class ContractService {
 
     private final ContractRepository contractRepository;
 
+    public final KafkaService kafkaService;
+
     public List<Contract> getAll() {
         return StreamSupport
                 .stream(contractRepository.findAll().spliterator(), false)
@@ -32,6 +34,8 @@ public class ContractService {
         Contract contract = contractRepository.findById(contractId).orElseThrow(() -> new IllegalArgumentException());
         contract.setStatus(contractStatus);
         contractRepository.save(contract);
+
+        kafkaService.sendMessage("Test", "Bla");
     }
 
     public Contract createContract() {
