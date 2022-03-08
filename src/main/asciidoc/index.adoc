@@ -11,9 +11,10 @@
 ``git clone git@github.com:kafka-course/kafka-pro``
 
 ### Setup Infrastructure
-``
+[source, sh]
+----
 docker-compose up -d
-``
+----
 
 (When you are having problems starting the Web UI container, you likely have to change file permissions:
 ``sudo chown -R 5050:5050 volumes/pg-admin-data/``)
