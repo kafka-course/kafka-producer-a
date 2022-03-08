@@ -1,13 +1,14 @@
 # First Attempt of sending an event
 
-
-
 ## What this example project shows
 
 * set up a two broker kafka cluster with docker-compose
 * send messages, ignoring any response from the Producer-API
 
 ## Let it run
+
+### Clone it
+``git clone git@github.com:kafka-course/kafka-pro``
 
 ### Setup Infrastructure
 ``
